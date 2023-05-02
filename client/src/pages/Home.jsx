@@ -1,8 +1,22 @@
 import React from 'react'
-import {Link} from "react-router-dom"
-
+import {Link, useLocation} from "react-router-dom"
+import axios from "axios"
+import {useState, useEffect} from 'react'
 const Home = () => {
-  const cars = [
+  const [cars,setCars] = useState([])
+  const cat = useLocation().search
+  useEffect(()=>{
+    const fetchData = async()=>{
+      try{
+        const res = await axios.get(`/cars${cat}`)
+        setCars(res.data);
+      }catch(err){
+        console.log(err);
+      };
+    };
+    fetchData();
+  },[cat]);
+ /* const cars = [
     {
       id: 1,
       title: "2023 Toyota GR Supra",
@@ -27,21 +41,21 @@ const Home = () => {
       desc: "Model: 2023 Lexus IS Horsepower: 311 hp MSRP: From $44,160 Engine: 3.5 L V6 MPG: Up to 20 city / 28 highway Cargo volume: 10.8 ft³ Engine cylinder configuration: V engine",
       img: "https://media.ed.edmunds-media.com/lexus/is-350/2022/oem/2022_lexus_is-350_sedan_f-sport_fq_oem_1_1600.jpg",
     },
-  ];
+  ];*/
   return (
     <div className='home'>
       <div className="cars">
         {cars.map((car)=>(
-          <div className="car" key = {car.id}>
+          <div className="car" key = {car.cars_id}>
             <div className="img">
               <img src={car.img} alt=""/>
             </div>
             <div className="content">
-              <Link className = "link" to={`/car/${car.id}`}>
-              <h1>{car.title}</h1>
+              <Link className = "link" to={`/car/${car.cars_id}`}>
+              <h1>{car.cars_info}</h1>
               </Link>
-              <p>{car.desc}</p>
-              <Link className = "link" to={`/car/${car.id}`}>
+              <p>{car.cars_description}</p>
+              <Link className = "link" to={`/car/${car.cars_id}`}>
                 <button>More info.</button>
               </Link>
             </div>

@@ -31,7 +31,7 @@ function Navbar() {
           <Link className="link" to="/?cat=Hybrids">
             <h6>Hybrids</h6>
           </Link>
-          <Link className="link" to="/?cat=Sport cars">
+          <Link className="link" to="/?cat=Sport">
             <h6>Sport cars</h6>
           </Link>
           <span>{currentUser?.username}</span>

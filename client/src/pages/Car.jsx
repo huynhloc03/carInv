@@ -1,20 +1,33 @@
 import React from 'react'
 import Recommendation from '../components/Recommendation'
-
+import {Link, useLocation} from "react-router-dom"
+import axios from "axios"
+import {useState, useEffect} from 'react'
 const Car = () => {
+  const [car,setCar] = useState([])
+  const location = useLocation();
+
+  const carID = location.pathname.split("/")[2];
+
+  useEffect(()=>{
+    const fetchData = async()=>{
+      try{
+        const res = await axios.get(`/car${carID}`)
+        setCar(res.data);
+      }catch(err){
+        console.log(err);
+      };
+    };
+    fetchData();
+  },[carID]);
   return (
     <div className = "oneCar">
       <div className="content">
-        <img src="https://www.cnet.com/a/img/resize/83b544d968b36e5e77e8b7eec600092e87ed4394/hub/2022/09/05/1b6db5e5-bed7-4b60-bc5c-88a330792bd2/2023-toyota-supra-manual-001.jpg?auto=webp&fit=crop&height=675&width=1200" alt =""/>
-        <h1>2023 Toyota GR Supra</h1>
+        <img src = {car?.img} alt =""/>
+        <h1>{car.cars_info}</h1>
         <h3 className ="overview">Overview</h3>
         <p>
-          Body style: Coupe <br />
-          0-60 mph: 5.1 to 6.3 seconds <br />
-          Bore: 3.2″ <br />
-          Cargo volume: 10.2 ft³ <br />
-          Compression ratio: 10.2 <br />
-          Engine cylinder configuration: Straight engine
+          {car.cars_description}
         </p>
       </div>
       <Recommendation/>
