@@ -9,13 +9,15 @@ export const getCars = (req,res)=>{
     })
 }
 export const getCar = (req, res) => {
-    const q = "SELECT `cars_info`, `cars_description`, `img`, `cat` FROM cars WHERE id = ?";
+    console.log(req.params.id);
+    const q = "SELECT `cars_info`, `cars_description`, `img`, `cat` FROM cars WHERE cars_id = ?";
     database.query(q, [req.params.id], (err, data) => {
       if (err) return res.json(err);
       if (data.length === 0) return res.status(404).json("Car not found.");
       return res.status(200).json(data[0]);
     });
-  };
+};
+
   
 export const addCar = (req,res)=>{
     res.json("from control")

@@ -6,11 +6,11 @@ import {
 } from "react-router-dom";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import Add from "./pages/Add";
-import Car from "./pages/Car";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import Add from "./pages/Add.jsx";
+import Car from "./pages/Car.jsx";
+import Home from "./pages/Home.jsx";
+import Login from "./pages/Login.jsx";
+import Register from "./pages/Register.jsx";
 import "./style.scss";
 const Layout = ()=>{
   return(
